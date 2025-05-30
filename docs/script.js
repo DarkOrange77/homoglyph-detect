@@ -4,11 +4,16 @@ document.getElementById('detectBtn').addEventListener('click', async () => {
     resultDiv.textContent = "Detecting...";
 
     try {
-        const response = await fetch('https://homoglyph-detect.onrender.com', {
+        const response = await fetch('https://homoglyph-detect.onrender.com/detect', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text })
         });
+
+        if (!response.ok) {
+            throw new Error('Server error');
+        }
+
         const data = await response.json();
 
         if (data.is_suspicious) {
