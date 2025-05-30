@@ -9,11 +9,6 @@ document.getElementById('detectBtn').addEventListener('click', async () => {
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ text })
         });
-
-        if (!response.ok) {
-            throw new Error('Server error');
-        }
-
         const data = await response.json();
 
         if (data.is_suspicious) {
